@@ -1,0 +1,98 @@
+127.0.0.1:6379> zadd zset 100 yz 21 zwl 32 wc 4 pv 11 hxx 15 xzg
+(integer) 6
+127.0.0.1:6379> zrange zset 0 -1
+1) "pv"
+2) "hxx"
+3) "xzg"
+4) "zwl"
+5) "wc"
+6) "yz"
+127.0.0.1:6379> zrangebyscore zset 0 77 withscores
+ 1) "pv"
+ 2) "4"
+ 3) "hxx"
+ 4) "11"
+ 5) "xzg"
+ 6) "15"
+ 7) "zwl"
+ 8) "21"
+ 9) "wc"
+10) "32"
+127.0.0.1:6379> zcount zset 0 77
+(integer) 5
+127.0.0.1:6379> zlexcount zset [a [g
+(integer) 0
+127.0.0.1:6379> zrange zset 0 3
+1) "pv"
+2) "hxx"
+3) "xzg"
+4) "zwl"
+127.0.0.1:6379> zrevrange zset 0 3
+1) "yz"
+2) "wc"
+3) "zwl"
+4) "xzg"
+127.0.0.1:6379> zrange zset 0 -1
+1) "pv"
+2) "hxx"
+3) "xzg"
+4) "zwl"
+5) "wc"
+6) "yz"
+127.0.0.1:6379> zrevrangebyscore zset 10 20 withscores
+(empty list or set)
+127.0.0.1:6379> zrevrangebylex zset [a [g
+(empty list or set)
+127.0.0.1:6379> zrank zset pv
+(integer) 0
+127.0.0.1:6379> zrank zset wc
+(integer) 4
+127.0.0.1:6379> zscore zset wc
+"32"
+127.0.0.1:6379> zcard zset
+(integer) 6
+127.0.0.1:6379> zrem zset wc
+(integer) 1
+127.0.0.1:6379> zincrby zset zwl 50
+(error) ERR value is not a valid float
+127.0.0.1:6379> zrange zset 0 -1
+1) "pv"
+2) "hxx"
+3) "xzg"
+4) "zwl"
+5) "yz"
+127.0.0.1:6379> zrange zset 0 -1 withscores
+ 1) "pv"
+ 2) "4"
+ 3) "hxx"
+ 4) "11"
+ 5) "xzg"
+ 6) "15"
+ 7) "zwl"
+ 8) "21"
+ 9) "yz"
+10) "100"
+127.0.0.1:6379> zincrby zset 50 zwl
+"71"
+127.0.0.1:6379> zadd zset1 10 pv 1 yz
+(integer) 2
+127.0.0.1:6379> zinterstore zset3 2 zset zset1
+(integer) 2
+127.0.0.1:6379> zrange zset3 0 -1
+1) "pv"
+2) "yz"
+127.0.0.1:6379>  zrange zset3 0 -1 withscores
+1) "pv"
+2) "14"
+3) "yz"
+4) "101"
+127.0.0.1:6379> zunionstore zset4 2 zset zset1
+(integer) 5
+127.0.0.1:6379> zrange zset4 0 -1
+1) "hxx"
+2) "pv"
+3) "xzg"
+4) "zwl"
+5) "yz"
+127.0.0.1:6379> zrange zet4 0 -1 withscores
+(empty list or set)

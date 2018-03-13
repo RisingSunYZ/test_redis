@@ -1,0 +1,67 @@
+
+C:\redis>redis-cli
+127.0.0.1:6379> sadd set yz zwl xuzg hxx zty wc pc
+(integer) 7
+127.0.0.1:6379> smembers set ------------
+1) "xuzg"
+2) "zwl"
+3) "yz"
+4) "hxx"
+5) "wc"
+6) "zty"
+7) "pc"
+127.0.0.1:6379> scard set ----------------
+(integer) 7
+127.0.0.1:6379> sismember set tz------------
+(integer) 0
+127.0.0.1:6379> spop set
+"pc"
+127.0.0.1:6379> spop set
+"xuzg"
+127.0.0.1:6379> srandmember set 3---------
+1) "yz"
+2) "zty"
+3) "zwl"
+127.0.0.1:6379> srandmember set 3
+1) "wc"
+2) "zty"
+3) "zwl"
+127.0.0.1:6379> srem wc zty zwl
+(integer) 0
+127.0.0.1:6379> srem set wc zty
+(integer) 2
+127.0.0.1:6379> smembers set
+1) "yz"
+2) "hxx"
+3) "zwl"
+127.0.0.1:6379> sadd set2 yz zwl
+(integer) 2
+127.0.0.1:6379> sdiff set set2 --------------
+1) "hxx"
+127.0.0.1:6379> sdiffstore set3 set set2-------------
+(integer) 1
+127.0.0.1:6379> smembers set3
+1) "hxx"
+127.0.0.1:6379> sinter set set2----
+1) "yz"
+2) "zwl"
+127.0.0.1:6379> sinterstore set 3 set set2---------------
+(integer) 0
+127.0.0.1:6379> sinterstore set3 set set2
+(integer) 0
+127.0.0.1:6379> smembers set2
+1) "yz"
+2) "zwl"
+127.0.0.1:6379> sinterstore set4 set set2
+(integer) 0
+127.0.0.1:6379> sunion set set2-------------
+1) "yz"
+2) "zwl"
+127.0.0.1:6379> smembers set
+(empty list or set)
+127.0.0.1:6379> smove set2 set yz-----------------
+(integer) 1
+127.0.0.1:6379> smembers set
+1) "yz"
+127.0.0.1:6379> sinterstore set4 set set2
+(integer) 0

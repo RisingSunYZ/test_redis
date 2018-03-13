@@ -1,0 +1,73 @@
+
+C:\redis>redis-cli
+127.0.0.1:6379> ping
+PONG
+127.0.0.1:6379> set mykey cs
+OK
+127.0.0.1:6379> get mykey
+"cs"
+127.0.0.1:6379> type mykey
+string
+127.0.0.1:6379> rename mykey newmykey  ---------------
+OK
+127.0.0.1:6379> get newmykey
+"cs"
+127.0.0.1:6379> exists newmykey --------------
+(integer) 1
+127.0.0.1:6379> dump newmykey----------------
+"\x00\x02cs\a\x00\x99\x9e\xfd\x18;\xb4\x81)"
+127.0.0.1:6379> exists newmykey
+(integer) 1
+127.0.0.1:6379> del newmykey
+(integer) 1
+127.0.0.1:6379> exists newmykey
+(integer) 0
+127.0.0.1:6379> set mykey key
+OK
+127.0.0.1:6379> get mykey
+"key"
+127.0.0.1:6379> getrange mykey 0 3--------------------
+"key"
+127.0.0.1:6379> getrange mykey 0 1
+"ke"
+127.0.0.1:6379> getset mykey newval------------
+"key"
+127.0.0.1:6379> get mykey
+"newval"
+127.0.0.1:6379> set yourkey val2
+OK
+127.0.0.1:6379> mget mykey yourkey
+1) "newval"
+2) "val2"
+127.0.0.1:6379> strlen mykey---------------
+(integer) 6
+127.0.0.1:6379> mset mykey yourkey 1 2
+OK
+127.0.0.1:6379> mget mykey yourkey
+1) "yourkey"
+2) "val2"
+127.0.0.1:6379> mset mykey old1 yourkey old2
+OK
+127.0.0.1:6379> mget mykey yourkey
+1) "old1"
+2) "old2"
+127.0.0.1:6379> decr mykey-----------
+(error) ERR value is not an integer or out of range
+127.0.0.1:6379> set mykey 1
+OK
+127.0.0.1:6379> decr mykey
+(integer) 0
+127.0.0.1:6379> incr mykey------------
+(integer) 1
+127.0.0.1:6379> incrby mykey 4
+(integer) 5
+127.0.0.1:6379> get mykey
+"5"
+127.0.0.1:6379> incrbyfloat mykey 1.1------------
+"6.1"
+127.0.0.1:6379> get yourkey
+"old2"
+127.0.0.1:6379> append yourkey 11------------------
+(integer) 6
+127.0.0.1:6379> get yourkey
+"old211"

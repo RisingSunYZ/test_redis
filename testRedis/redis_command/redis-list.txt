@@ -1,0 +1,72 @@
+C:\redis>redis-cli
+127.0.0.1:6379> lpush list yz
+(integer) 1
+127.0.0.1:6379> lpush list zwl xzg hxx pc wc zty
+(integer) 7
+127.0.0.1:6379> lindex list 0----------
+"zty"
+127.0.0.1:6379> llen list------------
+(integer) 7
+
+127.0.0.1:6379> lpop list
+"zty"
+127.0.0.1:6379> lindex list 0
+"wc"
+127.0.0.1:6379> rpop list
+"yz"
+127.0.0.1:6379> rpush list yz
+(integer) 6
+127.0.0.1:6379> lpush list xdg
+(integer) 7
+127.0.0.1:6379> lrange list 0 6
+1) "xdg"
+2) "wc"
+3) "pc"
+4) "hxx"
+5) "xzg"
+6) "zwl"
+7) "yz"
+127.0.0.1:6379> lset list 0 cs-----------
+OK
+127.0.0.1:6379> lrange list 0 6
+1) "cs"
+2) "wc"
+3) "pc"
+4) "hxx"
+5) "xzg"
+6) "zwl"
+7) "yz"
+127.0.0.1:6379> linsert list before yz yzq----------
+(integer) 8
+127.0.0.1:6379> lrange list 0 7
+1) "cs"
+2) "wc"
+3) "pc"
+4) "hxx"
+5) "xzg"
+6) "zwl"
+7) "yzq"
+8) "yz"
+127.0.0.1:6379> lpop list
+"cs"
+127.0.0.1:6379> lrem list 1 cs------------
+(integer) 0
+127.0.0.1:6379> lrem list 1 wc
+(integer) 1
+
+127.0.0.1:6379> llen list
+(integer) 6
+127.0.0.1:6379> lrange list 0 6
+1) "pc"
+2) "hxx"
+3) "xzg"
+4) "zwl"
+5) "yzq"
+6) "yz"
+127.0.0.1:6379> ltrim list 0 2-------------
+OK
+
+127.0.0.1:6379> lrange list 0 6
+1) "pc"
+2) "hxx"
+3) "xzg"
